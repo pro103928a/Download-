@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>তাঁহের মোল্লা ডাউনলোডার</title>
+    <title>F A C EB OOK DOWNLOADER</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Hind+Siliguri:wght@400;600;700&display=swap');
 
@@ -305,14 +305,14 @@
 <body>
 
     <div class="container">
-        <div class="title">TAHER MOLLA DOWNLOADER</div>
-        <div class="subtitle">সেরা স্পিড, সেরা কোয়ালিটি - ছত্তার বাড়ি স্পেশাল</div>
+        <div class="title">F A C EB OOK DOWNLOADER</div>
+        <div class="subtitle">Download videos from F a c ebook</div>
         
         <div class="input-group">
-            <input type="text" id="videoLink" placeholder="ভিডিও লিংক এখানে দিন (Facebook/YouTube)...">
+            <input type="text" id="videoLink" placeholder="Paste link here (F)...">
         </div>
         
-        <button class="btn-main" onclick="fetchVideoInfo()">ভিডিও খুঁজুন</button>
+        <button class="btn-main" onclick="fetchVideoInfo()">FIND QUALITY</button>
 
         <div id="mainLoader" class="loader" style="display:none; margin-top:20px;"></div>
 
@@ -338,7 +338,7 @@
             <p id="waitText" style="font-size: 0.8rem; color: #90a4ae; font-family: 'Roboto', 'Hind Siliguri', sans-serif;">দয়া করে অপেক্ষা করুন, ভিডিওটি রেডি করা হচ্ছে।</p>
             
             <div style="display: flex; justify-content: center;">
-                <a href="#" id="finalDownloadBtn" class="btn-final-download">📥 Save Video Now</a>
+                <a href="#" id="finalDownloadBtn" class="btn-final-download">Save To Download</a>
             </div>
         </div>
 
@@ -375,7 +375,7 @@
             const resultArea = document.getElementById('result-area');
             const processArea = document.getElementById('processArea');
             
-            if(!url) return showToast("দয়া করে একটি লিংক দিন!");
+            if(!url) return showToast("Invalid link!");
 
             loader.style.display = 'block';
             resultArea.style.display = 'none';
@@ -430,7 +430,7 @@
 
             } catch (err) {
                 loader.style.display = 'none';
-                showToast("কিছু একটা ভুল হয়েছে! আবার চেষ্টা করুন।");
+                showToast("Error! Please Try Again!");
                 console.error(err);
             }
         }
