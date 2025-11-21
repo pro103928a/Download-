@@ -6,14 +6,20 @@ import sys
 from flask import Flask, render_template, request, jsonify, send_file
 import yt_dlp
 
-# 1. অ্যাপ স্টার্ট হওয়ার লগ (লগ প্যানেলে দেখার জন্য)
-print("--> Application is starting...", flush=True)
+# --- ১. ডিরেক্টরি সেটআপ (খুব গুরুত্বপূর্ণ) ---
+# বর্তমান ফাইলের (main.py) লোকেশন বের করা হচ্ছে
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-# 2. টেমপ্লেট ফোল্ডার ফিক্স (যাতে index.html খুঁজে পায়)
-app = Flask(__name__, template_folder='.')
+# Flask কে বলা হচ্ছে টেমপ্লেট ফোল্ডার হিসেবে 'basedir' (বর্তমান ফোল্ডার) ব্যবহার করতে
+app = Flask(__name__, template_folder=basedir)
+
+# --- ২. ডিবাগিং (Logs চেক করার জন্য) ---
+print(f"--> App running in: {basedir}", flush=True)
+print(f"--> Files in current directory: {os.listdir(basedir)}", flush=True)
+# উপরের লাইনের কারণে আপনি লগে দেখতে পাবেন index.html আদৌ কপি হয়েছে কিনা
 
 # ফোল্ডার কনফিগারেশন
-DOWNLOAD_FOLDER = 'downloads'
+DOWNLOAD_FOLDER = os.path.join(basedir, 'downloads')
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
     print(f"--> Created folder: {DOWNLOAD_FOLDER}", flush=True)
@@ -39,6 +45,7 @@ cleanup_thread.start()
 
 @app.route('/')
 def index():
+    # এখানে সরাসরি ফাইলের নাম দেওয়া হলো, কারণ template_folder সেট করা আছে
     return render_template('index.html') 
 
 @app.route('/get-info', methods=['POST'])
@@ -121,7 +128,6 @@ def download_file(filename):
     else:
         return "File not found or expired", 404
 
-# লোকাল টেস্টিং এবং প্রোডাকশন কনফিগারেশন
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     print(f"--> Starting Flask Server on port {port}", flush=True)
