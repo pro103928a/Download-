@@ -1,6 +1,9 @@
 FROM python:3.9-slim
 
-# Install system dependencies (FFmpeg is required for yt-dlp)
+# 1. এই লাইনটি লগ জ্যাম হওয়া আটকাবে (খুব জরুরি)
+ENV PYTHONUNBUFFERED=1
+
+# 2. ভিডিও প্রসেসিংয়ের জন্য FFmpeg ইনস্টল
 RUN apt-get update && \
     apt-get install -y ffmpeg && \
     rm -rf /var/lib/apt/lists/*
@@ -12,8 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Expose port 10000 (Default for Render)
-EXPOSE 10000
-
-# Run the application using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--timeout", "120", "main:app"]
+# 3. Render এর অটোমেটিক পোর্টে রান হবে
+CMD gunicorn --bind 0.0.0.0:$PORT main:app
