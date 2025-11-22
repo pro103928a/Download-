@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # 1. এই লাইনটি লগ জ্যাম হওয়া আটকাবে (খুব জরুরি)
 ENV PYTHONUNBUFFERED=1
